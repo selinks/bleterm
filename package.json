@@ -1,6 +1,7 @@
 {
   "main": "index.js",
   "dependencies": {
+    "@abandonware/bluetooth-hci-socket": "^0.5.3-11",
     "@abandonware/noble": "^1.9.2-23",
     "keypress": "0.2.1"
   }

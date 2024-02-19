@@ -17,16 +17,23 @@ process.stdin.on('keypress', function (ch, key) {
     process.exit()
   }
   
-  if (char === 'return') {
-    print('\r');
-    print('\n');
-  }  
-
   onKeyPress(key ? key.sequence : ch);
   //console.log(ch);
   //console.log(key);
   //console.log(char);
-  //console.log(key.sequence);
+  //console.log(key.sequence.charCodeAt(0)); 'backspace' - PyTTY 127 works, Termux - 127 doesn't work
+  
+  if (char === 'return') {
+    print('\r');
+    print('\n');
+    return;
+  }  
+  
+  if (char == 'backspace') {
+    print("\b \b");
+    return;
+  }
+  
   print(key ? key.sequence : ch);
 });
 
