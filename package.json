@@ -1,8 +1,24 @@
 {
+  "name": "bleterm",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/selinks/bleterm#readme",
+  "bugs": {
+    "url": "https://github.com/selinks/bleterm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/selinks/bleterm.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
-    "@abandonware/bluetooth-hci-socket": "^0.5.3-11",
-    "@abandonware/noble": "^1.9.2-23",
-    "keypress": "0.2.1"
+    "@stoprocent/noble": "^2.3.0",
+    "keypress": "^0.2.1"
   }
 }

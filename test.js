@@ -1,4 +1,4 @@
-const noble = require('@abandonware/noble');
+const noble = require('@stoprocent/noble');
 
 const bleNusServiceUUID  = '6e400001b5a3f393e0a9e50e24dcca9e';
 const bleNusCharRXUUID   = '6e400002b5a3f393e0a9e50e24dcca9e';
