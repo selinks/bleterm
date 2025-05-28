@@ -15,20 +15,21 @@ function onServicesAndCharacteristicsDiscovered (
   }
 
   console.log('Discovered services and characteristics');
-  const rx = characteristics[0];
-  const tx = characteristics[1];
+  //console.log(characteristics);
+  const tx = characteristics[0];
+  const rx = characteristics[1];
 
   // data callback receives notifications
-  rx.on('data', (data, isNotification) => {
+  tx.on('data', (data, isNotification) => {
     console.log(`Received: "${data}"`);
   });
 
   // subscribe to be notified whenever the peripheral update the characteristic
-  rx.subscribe((error) => {
+  tx.subscribe((error) => {
     if (error) {
-      console.error('Error subscribing to rx');
+      console.error('Error subscribing to tx');
     } else {
-      console.log('Subscribed for rx notifications');
+      console.log('Subscribed for tx notifications');
     }
   });
 
@@ -36,10 +37,10 @@ function onServicesAndCharacteristicsDiscovered (
   let count = 0;
   setInterval(() => {
     count++;
-    const message = Buffer.from(`hello, ble ${count}`, 'utf-8');
-    console.log(`Sending:  '${message}'`);
-    tx.write(message);
-  }, 5000);
+    const message = Buffer.from(`hello, ble ${count}` + '\r', 'utf-8');
+    console.log(` Sending:  '${message}'`); // first symbol will be overwritten by CR
+    rx.write(message);
+  }, 8000);
 }
 
 function connectAndSetUp (peripheral) {
@@ -81,7 +82,4 @@ noble.on('discover', (peripheral) => {
   console.log(`Connecting to '${name}' ${peripheral.id}`);
   connectAndSetUp(peripheral);
 });
-
-
-
 

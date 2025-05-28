@@ -11,7 +11,7 @@ const bleNusCharRXUUID   = '6e400002b5a3f393e0a9e50e24dcca9e';
 const bleNusCharTXUUID   = '6e400003b5a3f393e0a9e50e24dcca9e';
 //Connect to d8ad0dc6c2b1
 
-let tx;
+let rx;
 
 // this function is run once at the beginning of your program
 async function setup() {
@@ -45,7 +45,7 @@ async function loop() {
 function onKeyPress(key) {
   //print(key);
   const message = Buffer.from(key, 'utf-8');
-  tx.write(message);
+  rx.write(message);
 }
 
 /*
@@ -71,22 +71,22 @@ function onServicesAndCharacteristicsDiscovered (
   }
 
   console.log('Discovered services and characteristics');
-  const rx = characteristics[0];
-  tx = characteristics[1];
+  const tx = characteristics[0];
+  rx = characteristics[1];
 
   // data callback receives notifications
-  rx.on('data', (data, isNotification) => {
+  tx.on('data', (data, isNotification) => {
     //console.log(`Received: "${data}"`);
     print(`${data}`);
     //console.log(`${data}`);
   });
 
   // subscribe to be notified whenever the peripheral update the characteristic
-  rx.subscribe((error) => {
+  tx.subscribe((error) => {
     if (error) {
-      console.error('Error subscribing to rx');
+      console.error('Error subscribing to tx');
     } else {
-      console.log('Subscribed for rx notifications');
+      console.log('Subscribed for tx notifications');
     }
   });
 
@@ -100,7 +100,7 @@ function onServicesAndCharacteristicsDiscovered (
   }, 5000);*/
 }
 
-function connectAndSetUp (peripheral) {
+function connectAndSetUp(peripheral) {
   peripheral.connect((error) => {
     if (error) {
       console.error(error);
